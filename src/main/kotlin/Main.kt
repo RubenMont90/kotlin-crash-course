@@ -12,7 +12,7 @@ fun guessTheNumber(){
     do {
         print("> Guess the number the computer chose: ")
         guessedNumber = readln().toIntOrNull() ?: 0
-        if(guessedNumber == 0){
+        if(guessedNumber == 0 || guessedNumber > 100 || guessedNumber < -1){
             println("> Invalid Guess! Choose again!")
             println("> Choose between [1-100] or (-1) to exit")
         }
