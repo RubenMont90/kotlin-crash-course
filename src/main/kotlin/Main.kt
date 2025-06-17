@@ -12,7 +12,7 @@ enum class GameOptions(val code:Int) {
 }
 
 fun main(){
-    rockPaperScissors()
+    guessTheNumber()
 }
 
 fun guessTheNumber(){
@@ -23,31 +23,27 @@ fun guessTheNumber(){
     do {
         print("> Guess the number the computer chose: ")
         guessedNumber = readln().toIntOrNull() ?: 0
-        if(guessedNumber == 0 || guessedNumber > 100 || guessedNumber < -1){
-            println("> Invalid Guess! Choose again!")
-            println("> Choose between [1-100] or (-1) to exit")
+
+        when{
+            guessedNumber == 0 || guessedNumber > 100 || guessedNumber < -1 -> println("> Invalid Guess! Choose again!\n> Choose between [1-100] or (-1) to exit")
+            guessedNumber == -1 -> {
+                guessedNumber=number
+                amountOfTries = -1
+            }
+            guessedNumber < number -> println(">> GO HIGHER!")
+            guessedNumber > number -> println(">> go lower!")
+            guessedNumber == number -> println("> Well Done! The number was in fact: $guessedNumber")
+            else -> println("> How did i get here...")
         }
-        else if(guessedNumber == -1){
-            guessedNumber=number
-            amountOfTries = -1
-        }
-        else if(guessedNumber < number)
-            println(">> GO HIGHER!")
-        else if(guessedNumber > number)
-            println(">> go lower!")
-        else if(guessedNumber == number)
-            println("> Well Done! The number was in fact: $guessedNumber")
-        else
-            println("> How did i get here...")
         amountOfTries++
+
     } while(guessedNumber != number)
 
-    if(amountOfTries == 0)
-        println("> Quitter :(")
-    else if(amountOfTries <= minThreshold)
-        println("> Only took you $amountOfTries tries!!")
-    else
-        println("> Took you $amountOfTries tries... Those are rookie numbers.")
+    when{
+        amountOfTries == 0 -> println("> Quitter :(")
+        amountOfTries <= minThreshold -> println("> Only took you $amountOfTries tries!!")
+        else -> println("> Took you $amountOfTries tries... Those are rookie numbers.")
+    }
 }
 
 fun rockPaperScissors(){
