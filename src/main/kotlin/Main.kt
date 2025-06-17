@@ -1,12 +1,12 @@
 import kotlin.random.Random
 
 fun main(){
-    guessTheNumber()
+    rockPaperScissors()
 }
 
 fun guessTheNumber(){
     val minThreshold = 10
-    val number = Random.nextInt(1, 100)
+    val number = Random.nextInt(1, 101)
     var amountOfTries = 0
     var guessedNumber = 0
     do {
@@ -37,4 +37,10 @@ fun guessTheNumber(){
         println("> Only took you $amountOfTries tries!!")
     else
         println("> Took you $amountOfTries tries... Those are rookie numbers.")
+}
+
+fun rockPaperScissors(){
+
+    val number = Random.nextInt(0, 3)
+    println(number)
 }
