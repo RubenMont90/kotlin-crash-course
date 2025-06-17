@@ -1,4 +1,15 @@
+import kotlin.code
+import kotlin.math.abs
 import kotlin.random.Random
+
+enum class GameOptions(val code:Int) {
+    ROCK(1), PAPER(2), SCISSOR(3);
+    companion object {
+        fun fromCode(code: Int): GameOptions? {
+            return entries.find { it.code == code }
+        }
+    }
+}
 
 fun main(){
     rockPaperScissors()
@@ -40,7 +51,19 @@ fun guessTheNumber(){
 }
 
 fun rockPaperScissors(){
+    val number = Random.nextInt(1, 4)
 
-    val number = Random.nextInt(0, 3)
-    println(number)
+    println("Choose 1-3 [1=ROCK 2=PAPER 3=SCISSOR]")
+    val input = readln().toIntOrNull() ?: 0
+
+    println("Computer:${GameOptions.fromCode(number)} vs Player:${GameOptions.fromCode(input)}")
+
+    val diff = number - input
+    val result = when {
+        diff == 0 -> "It's a TIE!"
+        abs(diff) == 1 -> if (number > input) "Computer WON!" else "Player WON!"
+        else -> if (number == 1) "Computer WON!" else "Player WON!"
+    }
+
+    println(result)
 }
